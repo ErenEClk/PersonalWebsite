@@ -21,6 +21,14 @@ const translations = {
     'certificates': 'Sertifikalar',
     'languages': 'Konuşulan Diller',
     'projects.coming.soon': 'Projeler bölümü yakında güncellenecek...',
+    
+    // Projeler
+    'project.1.title': 'Micro Fundus Camera Ar-Ge',
+    'project.1.description': 'Minyatürleştirilmiş retina görüntüleme cihazları üzerine araştırma ve geliştirme projesine katkıda bulunmaya başladım. Optik, fizik ve yapay zeka alanlarını birleştiriyor.',
+    'project.2.title': 'Teorik Matematik Araştırması',
+    'project.2.description': 'Collatz konjektürü, tersinir hesaplama ve P vs NP gibi problemleri mantık ve bilgi teorisini birleştirerek bağımsız olarak araştırıyorum.',
+    'project.3.title': 'Mobil ve Web Uygulama Geliştirme',
+    'project.3.description': 'Kişisel ve işbirlikçi kullanım için mobil uygulamalar ve web siteleri geliştirdim. Kullanıcı deneyimi ve sistem mantığına odaklanıyorum.',
     'detailed.cv': 'Detaylı CV',
     'cv.pdf': 'CV (PDF)',
     
@@ -130,6 +138,14 @@ const translations = {
     'certificates': 'Certificates',
     'languages': 'Languages',
     'projects.coming.soon': 'Projects section will be updated soon...',
+    
+    // Projects
+    'project.1.title': 'Micro Fundus Camera R&D',
+    'project.1.description': 'Recently started contributing to a research and development project focused on miniaturized retinal imaging devices, combining optics, physics, and AI.',
+    'project.2.title': 'Theoretical Math Research',
+    'project.2.description': 'Independently exploring problems such as the Collatz conjecture, reversible computation, and P vs NP through combining logic and information theory.',
+    'project.3.title': 'Mobile & Web App Development',
+    'project.3.description': 'Created mobile apps and websites for personal and collaborative use, with emphasis on user experience and system logic.',
     'detailed.cv': 'Detailed CV',
     'cv.pdf': 'CV (PDF)',
     

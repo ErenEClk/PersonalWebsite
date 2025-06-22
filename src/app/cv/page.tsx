@@ -59,7 +59,7 @@ export default function CVPage() {
         <div className={styles.personalInfo}>
           <div className={styles.infoGrid}>
             <div><strong>{t('cv.name')}:</strong> Eren Ege Çelik</div>
-            <div><strong>{t('cv.email')}:</strong> <a href="mailto:erenecelik@example.com">erenecelik@example.com</a></div>
+            <div><strong>{t('cv.email')}:</strong> <a href="mailto:erenegecelik62@gmail.com">erenegecelik62@gmail.com</a></div>
             <div><strong>GitHub:</strong> <a href="https://github.com/ErenEClk" target="_blank" rel="noopener noreferrer">github.com/ErenEClk</a></div>
           </div>
         </div>
@@ -150,7 +150,7 @@ export default function CVPage() {
             <div className={styles.experienceHeader}>
               <h3>{t('cv.internship.title')}</h3>
               <span className={styles.experienceLocation}>{t('cv.germany')}</span>
-              <span className={styles.experienceDate}>2024 ({t('cv.12th.grade.break')})</span>
+                              <span className={styles.experienceDate}>2023 ({t('cv.12th.grade.break')})</span>
             </div>
             <div className={styles.experienceDetails}>
               <p><strong>{t('cv.period')}:</strong> {t('cv.internship.period')}</p>

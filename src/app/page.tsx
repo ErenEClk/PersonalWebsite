@@ -41,9 +41,20 @@ export default function Home() {
     { title: "Augmented Mechanics", issuer: "Kadir Has Üniversitesi", year: 2023 },
   ];
 
-  // const projects = [
-  //   // Projeler geçici olarak kaldırıldı - yakında güncellenecek
-  // ];
+  const projects = [
+    {
+      title: t('project.1.title'),
+      description: t('project.1.description')
+    },
+    {
+      title: t('project.2.title'),
+      description: t('project.2.description')
+    },
+    {
+      title: t('project.3.title'),
+      description: t('project.3.description')
+    }
+  ];
 
   return (
     <div className={styles.pageModern}>
@@ -57,9 +68,14 @@ export default function Home() {
         <ul className={styles.tags}>{interests.map((i) => <li key={i}>{i}</li>)}</ul>
       </SectionCard>
       <SectionCard title={t('projects')}>
-        <p style={{ color: "#e0e6ed", fontStyle: "italic" }}>
-          {t('projects.coming.soon')}
-        </p>
+        <div className={styles.projectsList}>
+          {projects.map((project, index) => (
+            <div key={index} className={styles.projectItem}>
+              <h3 className={styles.projectTitle}>{project.title}</h3>
+              <p className={styles.projectDescription}>{project.description}</p>
+            </div>
+          ))}
+        </div>
       </SectionCard>
       <SectionCard title={t('certificates')}>
         <ul>{certificates.map((c) => <li key={c.title}>{c.title} - {c.issuer} ({c.year})</li>)}</ul>

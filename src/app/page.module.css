@@ -1014,3 +1014,38 @@ a.secondary {
     padding: 3px 6px;
   }
 }
+
+/* Projects Styles */
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.projectItem {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.projectItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.projectTitle {
+  color: #4fc3f7;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  margin-top: 0;
+}
+
+.projectDescription {
+  color: #e0e6ed;
+  line-height: 1.6;
+  margin: 0;
+}
