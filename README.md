@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Website - Eren Ege Çelik
 
-## Getting Started
+🌟 **Modern, bilingual personal website with interactive physics animations**
 
-First, run the development server:
+## 🚀 Features
+
+- **Bilingual Support** (Turkish/English) with real-time language switching
+- **Interactive Physics Animations**: 3-body problem simulation and double-slit experiment
+- **Modern UI Design** with glassmorphism effects and smooth animations
+- **Comprehensive CV Section** with downloadable documents
+- **Responsive Design** optimized for all devices
+- **Projects Showcase** including current research and development work
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: CSS Modules with modern animations
+- **Physics**: Three.js for 3D animations
+- **Deployment**: Vercel
+
+## 🔬 Physics Animations
+
+### 3-Body Problem Simulation
+Real-time gravitational simulation with three celestial bodies, complete with orbital trails and realistic physics calculations.
+
+### Double-Slit Experiment
+Interactive quantum physics demonstration that responds to user scroll, showing wave-particle duality and interference patterns.
+
+## 📋 Sections
+
+- **Profile Card**: Personal introduction with animated typing effect
+- **About**: Detailed academic and professional background
+- **Interests**: Research areas including quantum computing and theoretical physics
+- **Projects**: Current R&D work and independent research
+- **Certificates**: Academic achievements and certifications
+- **Languages**: Multilingual capabilities
+- **CV**: Comprehensive curriculum vitae with downloadable documents
+
+## 🌐 Getting Started
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── components/          # Reusable components
+│   ├── contexts/           # Language context for i18n
+│   ├── cv/                 # CV page
+│   ├── globals.css         # Global styles
+│   └── page.tsx           # Main page
+└── public/
+    ├── documents/          # Certificates and documents
+    └── profile.JPG        # Profile photo
+```
 
-## Learn More
+## 🎯 About the Developer
 
-To learn more about Next.js, take a look at the following resources:
+**Eren Ege Çelik** - First-year Physics student at İzmir Institute of Technology (İZTECH), passionate about quantum computing, theoretical physics, and software development. Currently contributing to research projects and exploring foundational problems in mathematics and computer science.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📞 Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Email**: erenegecelik62@gmail.com
+- **Phone**: +90 551 980 41 44
+- **GitHub**: [ErenEClk](https://github.com/ErenEClk)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ using Next.js and deployed on Vercel
