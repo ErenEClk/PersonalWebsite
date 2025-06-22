@@ -50,6 +50,7 @@ const translations = {
     // CV Detayları
     'cv.name': 'Ad Soyad',
     'cv.email': 'E-posta',
+    'cv.phone': 'Telefon',
     'cv.department': 'Bölüm',
     'cv.class': 'Sınıf',
     'cv.focus.areas': 'Odak Alanları',
@@ -167,6 +168,7 @@ const translations = {
     // CV Details
     'cv.name': 'Name',
     'cv.email': 'Email',
+    'cv.phone': 'Phone',
     'cv.department': 'Department',
     'cv.class': 'Year',
     'cv.focus.areas': 'Focus Areas',
