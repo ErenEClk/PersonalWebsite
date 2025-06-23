@@ -16,7 +16,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Eren Ege Çelik",
-  description: "İYTE Fizik öğrencisi, matematik ve bilgisayar bilimi tutkunu",
+  description: "Physics student at IZTECH with interests in mathematics, logic, and computer science. Research focus on theoretical physics and computational problems.",
+  openGraph: {
+    title: "Eren Ege Çelik",
+    description: "Physics student at IZTECH with interests in mathematics, logic, and computer science. Research focus on theoretical physics and computational problems.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "Eren Ege Çelik",
+    description: "Physics student at IZTECH with interests in mathematics, logic, and computer science. Research focus on theoretical physics and computational problems.",
+  },
 };
 
 export default function RootLayout({
