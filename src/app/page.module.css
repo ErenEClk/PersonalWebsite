@@ -524,19 +524,15 @@ a.secondary {
   }
   
   .pageModern::before {
-    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    left: 0;
     width: 100%;
   }
   
   .pageModern::after {
-    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    left: 0;
     width: 100%;
     font-size: 16px;
     word-spacing: 30px;
-  }
-  
-  .doubleSlit {
-    display: none !important; /* Mobile'da tamamen gizle */
   }
   
   .profileCardContent {
@@ -1113,10 +1109,6 @@ a.secondary {
     word-spacing: 20px;
   }
   
-  .doubleSlit {
-    display: none !important; /* Küçük ekranlarda da gizli */
-  }
-  
   .profileCard {
     width: calc(100vw - 8px);
     max-width: calc(100vw - 8px);
@@ -1171,19 +1163,15 @@ a.secondary {
   }
   
   .pageModern::before {
-    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    left: 0;
     width: 100%;
   }
   
   .pageModern::after {
-    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    left: 0;
     width: 100%;
     font-size: 16px;
     word-spacing: 30px;
-  }
-  
-  .doubleSlit {
-    display: none !important; /* Mobile'da tamamen gizle */
   }
   
   .profileCardContent {

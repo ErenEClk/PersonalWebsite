@@ -6,6 +6,7 @@ import SectionCard from "./SectionCard";
 import DoubleSlit from "./DoubleSlit";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useLanguage } from './contexts/LanguageContext';
+import { useState, useEffect } from 'react';
 
 const profile = {
   name: "Eren Ege Çelik",
@@ -17,6 +18,18 @@ const profile = {
 
 export default function Home() {
   const { t } = useLanguage();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 700);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const interests = [
     t('interest.math'),
@@ -59,7 +72,7 @@ export default function Home() {
   return (
     <div className={styles.pageModern}>
       <LanguageSwitcher />
-      <DoubleSlit />
+      {!isMobile && <DoubleSlit />}
       <ProfileCard profile={profile} />
       <SectionCard title={t('about')}>
         <p>{t('about.text')}</p>
