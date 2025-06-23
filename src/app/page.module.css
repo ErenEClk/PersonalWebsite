@@ -293,17 +293,25 @@ a.secondary {
 }
 
 .pageModern {
-  background: linear-gradient(-45deg, #0a1931, #162447, #1f4068, #0a1931);
+  background: linear-gradient(
+    135deg,
+    #0a1931 0%,
+    #13204a 30%,
+    #1e3764 60%,
+    #2a4a7f 100%
+  );
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 8s ease infinite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 0 64px 0;
-  gap: 32px;
+  justify-content: flex-start;
+  padding: 24px 16px;
+  gap: 24px;
+  color: #fff;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .pageModern::before {
@@ -510,21 +518,42 @@ a.secondary {
 }
 
 @media (max-width: 700px) {
+  .pageModern {
+    padding: 16px 8px;
+    gap: 16px;
+  }
+  
   .profileCardContent {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px 12px 24px 120px;
+    padding: 20px 16px;
   }
+  
   .profilePhotoCol {
-    left: 12px;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-bottom: 16px;
+    align-self: center;
   }
+  
   .profilePhotoModern {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
-  .sectionCard, .profileCard {
-    padding: 16px 8px;
-    min-width: 0;
+  
+  .profileCard {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    margin: 0;
+  }
+  
+  .sectionCard {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    margin: 0;
+    padding: 20px 16px;
   }
 }
 
@@ -1048,4 +1077,52 @@ a.secondary {
   color: #e0e6ed;
   line-height: 1.6;
   margin: 0;
+}
+
+@media (max-width: 480px) {
+  .pageModern {
+    padding: 12px 4px;
+    gap: 12px;
+  }
+  
+  .profileCard {
+    width: calc(100vw - 8px);
+    max-width: calc(100vw - 8px);
+  }
+  
+  .sectionCard {
+    width: calc(100vw - 8px);
+    max-width: calc(100vw - 8px);
+    padding: 16px 12px;
+  }
+  
+  .profileCardContent {
+    padding: 16px 12px;
+  }
+  
+  .profilePhotoModern {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .profileName {
+    font-size: 1.5rem;
+  }
+  
+  .tags li {
+    font-size: 0.9rem;
+    padding: 4px 12px;
+  }
+  
+  .languageSwitcher {
+    top: 12px;
+    right: 12px;
+    padding: 4px 8px;
+    gap: 4px;
+  }
+  
+  .langButton {
+    font-size: 0.75rem;
+    padding: 2px 4px;
+  }
 }

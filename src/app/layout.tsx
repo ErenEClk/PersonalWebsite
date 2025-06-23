@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eren Ege Çelik - Fizik Öğrencisi",
+  title: "Eren Ege Çelik",
   description: "İYTE Fizik öğrencisi, matematik ve bilgisayar bilimi tutkunu",
 };
 
