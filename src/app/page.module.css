@@ -523,6 +523,23 @@ a.secondary {
     gap: 16px;
   }
   
+  .pageModern::before {
+    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
+    width: calc(100% - 80px);
+  }
+  
+  .pageModern::after {
+    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
+    width: calc(100% - 80px);
+    font-size: 16px;
+    word-spacing: 30px;
+  }
+  
+  .doubleSlit {
+    width: 80px !important;
+    opacity: 0.5 !important;
+  }
+  
   .profileCardContent {
     flex-direction: column;
     align-items: flex-start;
@@ -1085,6 +1102,23 @@ a.secondary {
     gap: 12px;
   }
   
+  .pageModern::before {
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+  
+  .pageModern::after {
+    left: 60px;
+    width: calc(100% - 60px);
+    font-size: 12px;
+    word-spacing: 20px;
+  }
+  
+  .doubleSlit {
+    width: 60px !important;
+    opacity: 0.3 !important;
+  }
+  
   .profileCard {
     width: calc(100vw - 8px);
     max-width: calc(100vw - 8px);
@@ -1124,5 +1158,67 @@ a.secondary {
   .langButton {
     font-size: 0.75rem;
     padding: 2px 4px;
+  }
+}
+
+/* DoubleSlit Animation */
+.doubleSlit {
+  width: 200px !important;
+}
+
+@media (max-width: 700px) {
+  .pageModern {
+    padding: 16px 8px;
+    gap: 16px;
+  }
+  
+  .pageModern::before {
+    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
+    width: calc(100% - 80px);
+  }
+  
+  .pageModern::after {
+    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
+    width: calc(100% - 80px);
+    font-size: 16px;
+    word-spacing: 30px;
+  }
+  
+  .doubleSlit {
+    width: 80px !important;
+    opacity: 0.5 !important;
+  }
+  
+  .profileCardContent {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 16px;
+  }
+  
+  .profilePhotoCol {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-bottom: 16px;
+    align-self: center;
+  }
+  
+  .profilePhotoModern {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profileCard {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    margin: 0;
+  }
+  
+  .sectionCard {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    margin: 0;
+    padding: 20px 16px;
   }
 }

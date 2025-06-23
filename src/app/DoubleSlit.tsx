@@ -87,7 +87,17 @@ export default function DoubleSlit() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const width = 200;
+    // Mobile responsive width
+    const isMobile = window.innerWidth <= 700;
+    const isSmallMobile = window.innerWidth <= 480;
+    
+    let width = 200; // Desktop default
+    if (isSmallMobile) {
+      width = 60;
+    } else if (isMobile) {
+      width = 80;
+    }
+    
     const height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
@@ -263,6 +273,17 @@ export default function DoubleSlit() {
     animate();
 
     const handleResize = () => {
+      const isMobile = window.innerWidth <= 700;
+      const isSmallMobile = window.innerWidth <= 480;
+      
+      let newWidth = 200;
+      if (isSmallMobile) {
+        newWidth = 60;
+      } else if (isMobile) {
+        newWidth = 80;
+      }
+      
+      canvas.width = newWidth;
       canvas.height = window.innerHeight;
     };
 
@@ -280,8 +301,9 @@ export default function DoubleSlit() {
         zIndex: 2,
         pointerEvents: "none",
         opacity: 0.8,
-        width: "200px", // Sadece sol tarafta
+        width: "200px", // Desktop genişliği
       }}
+      className="doubleSlit"
     />
   );
 } 
