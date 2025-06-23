@@ -524,20 +524,19 @@ a.secondary {
   }
   
   .pageModern::before {
-    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
-    width: calc(100% - 80px);
+    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    width: 100%;
   }
   
   .pageModern::after {
-    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
-    width: calc(100% - 80px);
+    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    width: 100%;
     font-size: 16px;
     word-spacing: 30px;
   }
   
   .doubleSlit {
-    width: 80px !important;
-    opacity: 0.5 !important;
+    display: none !important; /* Mobile'da tamamen gizle */
   }
   
   .profileCardContent {
@@ -1103,20 +1102,19 @@ a.secondary {
   }
   
   .pageModern::before {
-    left: 60px;
-    width: calc(100% - 60px);
+    left: 0;
+    width: 100%;
   }
   
   .pageModern::after {
-    left: 60px;
-    width: calc(100% - 60px);
+    left: 0;
+    width: 100%;
     font-size: 12px;
     word-spacing: 20px;
   }
   
   .doubleSlit {
-    width: 60px !important;
-    opacity: 0.3 !important;
+    display: none !important; /* Küçük ekranlarda da gizli */
   }
   
   .profileCard {
@@ -1173,20 +1171,19 @@ a.secondary {
   }
   
   .pageModern::before {
-    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
-    width: calc(100% - 80px);
+    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    width: 100%;
   }
   
   .pageModern::after {
-    left: 80px; /* DoubleSlit küçüldüğü için soldan başlama pozisyonu */
-    width: calc(100% - 80px);
+    left: 0; /* DoubleSlit gizli olduğu için sol kenara kadar */
+    width: 100%;
     font-size: 16px;
     word-spacing: 30px;
   }
   
   .doubleSlit {
-    width: 80px !important;
-    opacity: 0.5 !important;
+    display: none !important; /* Mobile'da tamamen gizle */
   }
   
   .profileCardContent {
