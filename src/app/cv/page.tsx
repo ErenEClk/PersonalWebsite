@@ -72,7 +72,7 @@ export default function CVPage() {
           <div className={styles.educationItem}>
             <div className={styles.educationHeader}>
               <h3>Middle East Technical University (METU)</h3>
-              <span className={styles.educationDate}>2024 - {t('education.continuing')}</span>
+              <span className={styles.educationDate}>2025 - {t('education.continuing')}</span>
             </div>
             <div className={styles.educationDetails}>
               <p><strong>{t('cv.department')}:</strong> {t('education.physics')}</p>
@@ -90,7 +90,7 @@ export default function CVPage() {
           <div className={styles.educationItem}>
             <div className={styles.educationHeader}>
               <h3>İzmir Institute of Technology (İZTECH)</h3>
-              <span className={styles.educationDate}>2023 - 2024</span>
+              <span className={styles.educationDate}>2024 - 2025</span>
             </div>
             <div className={styles.educationDetails}>
               <p><strong>{t('cv.department')}:</strong> {t('education.physics')}</p>
@@ -199,43 +199,6 @@ export default function CVPage() {
       </CVSection>
       */}
 
-      {/* Beceriler */}
-      <CVSection title={t('skills')} icon="⚡">
-        <div className={styles.skillsSection}>
-          <div className={styles.skillCategory}>
-            <h4>{t('cv.programming.languages')}</h4>
-            <div className={styles.skillTags}>
-              <span className={styles.skillTag}>C</span>
-              <span className={styles.skillTag}>C#</span>
-              <span className={styles.skillTag}>Python</span>
-              <span className={styles.skillTag}>JavaScript</span>
-              <span className={styles.skillTag}>[{t('cv.other.languages')}...]</span>
-            </div>
-          </div>
-          
-          <div className={styles.skillCategory}>
-            <h4>{t('cv.technologies.tools')}</h4>
-            <div className={styles.skillTags}>
-              <span className={styles.skillTag}>Git</span>
-              <span className={styles.skillTag}>Linux</span>
-              <span className={styles.skillTag}>LaTeX</span>
-              <span className={styles.skillTag}>MATLAB</span>
-              <span className={styles.skillTag}>[{t('cv.other.tools')}...]</span>
-            </div>
-          </div>
-          
-          <div className={styles.skillCategory}>
-            <h4>{t('cv.academic.fields')}</h4>
-            <div className={styles.skillTags}>
-              <span className={styles.skillTag}>{t('cv.theoretical.physics')}</span>
-              <span className={styles.skillTag}>{t('interest.math')}</span>
-              <span className={styles.skillTag}>{t('cv.algorithm.analysis')}</span>
-              <span className={styles.skillTag}>{t('interest.crypto')}</span>
-              <span className={styles.skillTag}>{t('cv.quantum.computing')}</span>
-            </div>
-          </div>
-        </div>
-      </CVSection>
 
       {/* Sertifikalar */}
       <CVSection title={t('certificates')} icon="🏆">

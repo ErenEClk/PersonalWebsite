@@ -31,6 +31,7 @@ const translations = {
     'project.3.description': 'Kişisel ve işbirlikçi kullanım için mobil uygulamalar ve web siteleri geliştirdim. Kullanıcı deneyimi ve sistem mantığına odaklanıyorum.',
     'detailed.cv': 'Detaylı CV',
     'cv.pdf': 'CV (PDF)',
+    'research.publications': 'Araştırmalar',
     
     // Hakkımda metni
     'about.text': 'İzmir Yüksek Teknoloji Enstitüsü (İYTE) Fizik bölümü birinci sınıf öğrencisiyim ve hem teorik hem de uygulamalı fizik ile kuantum hesaplama konularında güçlü bir tutkuya sahibim. Akademik ilgi alanlarım Collatz konjektürü, P vs NP, tersinir hesaplama ve bilgi teorisinin fizik ve bilgisayar bilimi ile entegrasyonu gibi temel problemler etrafında şekilleniyor. C, C# ve Python dillerinde yetkinim ve birçok mobil uygulama ve website geliştirdim, bu da full-stack geliştirme ve kullanıcı odaklı tasarım becerilerimi güçlendirdi. Ayrıca tersinir mantık ve kriptografik sistemleri içeren bir proje dahil olmak üzere bağımsız araştırma projeleri yürüttüm ve bilgiyi koruyan yeni hesaplama modellerini keşfetmeyi hedefliyorum. Yakın zamanda Almanya\'da bir yarı iletken şirketinde staj yaptım ve burada çip üretim teknolojilerinde hands-on deneyim kazandım. Hedefim, bilim ve teknolojinin öncüsü olan disiplinler arası ekiplerle işbirliği yaparak kuantum hesaplama ve hesaplamalı fizik alanında öncü araştırmalara katkıda bulunmaktır.',
@@ -149,6 +150,7 @@ const translations = {
     'project.3.description': 'Created mobile apps and websites for personal and collaborative use, with emphasis on user experience and system logic.',
     'detailed.cv': 'Detailed CV',
     'cv.pdf': 'CV (PDF)',
+    'research.publications': 'Research',
     
     // About text
           'about.text': 'I am a first-year Physics student at İzmir Institute of Technology (İZTECH), with a strong passion for both theoretical and applied physics, as well as quantum computing. My academic interests revolve around foundational problems such as the Collatz conjecture, P vs NP, reversible computation, and the integration of information theory with physics and computer science. I am proficient in C, C#, and Python, and have developed several mobile applications and websites, which have strengthened my skills in full-stack development and user-focused design. I have also conducted independent research projects, including one involving reversible logic and cryptographic systems, aiming to explore new models of computation that preserve information. Recently, I completed an internship at a semiconductor company in Germany, where I gained hands-on experience in chip manufacturing technologies. My goal is to contribute to pioneering research in quantum computing and computational physics by collaborating with interdisciplinary teams working at the cutting edge of science and technology.',

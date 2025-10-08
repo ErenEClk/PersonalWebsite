@@ -31,6 +31,7 @@ export default function ProfileCard({ profile }: { profile: ProfileProps }) {
             <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="/cv">{t('detailed.cv')}</a>
             <a href={profile.cv} target="_blank" rel="noopener noreferrer">{t('cv.pdf')}</a>
+            <a href="/research">{t('research.publications')}</a>
           </div>
           <p className={styles.profileBioShort}>{t('profile.short.bio')}</p>
         </div>
