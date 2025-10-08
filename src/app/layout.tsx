@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <GoogleAnalytics measurementId="G-XXXXXXXXXX" />
+        <GoogleAnalytics measurementId="G-0T9H646SWH" />
         <LanguageProvider>
           {/* <ThreeBodyBackground /> */}
           <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
