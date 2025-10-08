@@ -118,13 +118,13 @@ const translations = {
     'education.focus.areas': 'Teorik Fizik, Matematik, Bilgisayar Bilimi',
     
     // İlgi Alanları
-    'interest.math': 'Matematik',
-    'interest.logic': 'Mantık',
-    'interest.cs': 'Bilgisayar Bilimi',
-    'interest.quantum': 'Kuantum Hesaplama',
-    'interest.physics': 'Teorik Fizik',
+    'interest.collatz': 'Collatz Konjektürü',
+    'interest.p.vs.np': 'P vs NP Problemi',
     'interest.reversible': 'Tersinir Hesaplama',
-    'interest.crypto': 'Kriptografi',
+    'interest.quantum': 'Kuantum Fiziği',
+    'interest.algorithms': 'Algoritma Analizi',
+    'interest.crypto': 'SHA-256 & Kriptografi',
+    'interest.semiconductor': 'Yarıiletken Teknolojisi',
     
     // Diller
     'lang.turkish': 'Türkçe (Ana dil)',
@@ -236,13 +236,13 @@ const translations = {
     'education.focus.areas': 'Theoretical Physics, Mathematics, Computer Science',
     
           // Interests
-      'interest.math': 'Mathematics',
-      'interest.logic': 'Logic',
-      'interest.cs': 'Computer Science',
-      'interest.quantum': 'Quantum Computing',
-      'interest.physics': 'Theoretical Physics',
+      'interest.collatz': 'Collatz Conjecture',
+      'interest.p.vs.np': 'P vs NP Problem',
       'interest.reversible': 'Reversible Computing',
-      'interest.crypto': 'Cryptography',
+      'interest.quantum': 'Quantum Physics',
+      'interest.algorithms': 'Algorithm Analysis',
+      'interest.crypto': 'SHA-256 & Cryptography',
+      'interest.semiconductor': 'Semiconductor Technology',
     
     // Languages
     'lang.turkish': 'Turkish (Native)',

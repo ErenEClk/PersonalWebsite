@@ -10,10 +10,10 @@ import { useState, useEffect } from 'react';
 
 const profile = {
   name: "Eren Ege Çelik",
-  bio: `I am a second-year Physics student at Middle East Technical University (METU), with a strong interest in mathematics, logic, and computer science. I am particularly passionate about theoretical problems such as the Collatz conjecture, P vs NP, and reversible computing, and I aim to develop new mathematical frameworks by integrating principles from information theory and computation. I have built solid skills in analytical thinking, problem-solving, and programming—especially in C—and have independently explored topics like reversible SAT circuits and SHA-256 logic design. Recently, I completed an internship at a semiconductor company in Germany, where I gained hands-on experience in chip production and deepened my understanding of applied physics and technology. My goal is to contribute to cutting-edge research in computational physics or theoretical computer science, and to work with innovative teams that tackle complex scientific challenges through creativity and rigorous logic.`,
+  bio: `I am a second-year Physics student at Middle East Technical University (METU), having transferred from İzmir Institute of Technology (İZTECH) where I completed my first year with a 3.56 GPA. I have a strong interest in mathematics, logic, and computer science, particularly in theoretical problems such as the Collatz conjecture, P vs NP, and reversible computing. I aim to develop new mathematical frameworks by integrating principles from information theory and computation. I have built solid skills in analytical thinking, problem-solving, and programming—especially in C—and have independently explored topics like reversible SAT circuits and SHA-256 logic design. Recently, I completed an internship at a semiconductor company in Germany, where I gained hands-on experience in chip production and deepened my understanding of applied physics and technology. My goal is to contribute to cutting-edge research in computational physics or theoretical computer science, and to work with innovative teams that tackle complex scientific challenges through creativity and rigorous logic.`,
   github: "https://github.com/ErenEClk",
   cv: "/cv.pdf",
-  photo: "/WhatsApp Image 2025-06-23 at 15.04.26.jpeg",
+  photo: "/IMG_0367.jpg",
 };
 
 export default function Home() {
@@ -32,13 +32,13 @@ export default function Home() {
   }, []);
 
   const interests = [
-    t('interest.math'),
-    t('interest.logic'), 
-    t('interest.cs'),
-    t('interest.quantum'),
-    t('interest.physics'),
+    t('interest.collatz'),
+    t('interest.p.vs.np'), 
     t('interest.reversible'),
-    t('interest.crypto')
+    t('interest.quantum'),
+    t('interest.algorithms'),
+    t('interest.crypto'),
+    t('interest.semiconductor')
   ];
 
   const languages = [

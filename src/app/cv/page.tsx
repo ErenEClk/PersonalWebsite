@@ -77,13 +77,26 @@ export default function CVPage() {
             <div className={styles.educationDetails}>
               <p><strong>{t('cv.department')}:</strong> {t('education.physics')}</p>
               <p><strong>{t('cv.class')}:</strong> Second Year</p>
-              <p><strong>GPA:</strong> 3.63/4.00</p>
+              <p><strong>Current GPA:</strong> 3.63/4.00</p>
               <p><strong>{t('cv.focus.areas')}:</strong> {t('education.focus.areas')}</p>
               <div className={styles.documentLinks}>
                 <a href="/transkriptim.JPG" target="_blank" rel="noopener noreferrer" className={styles.docLink}>
                   📄 {t('cv.transcript.download')}
                 </a>
               </div>
+            </div>
+          </div>
+
+          <div className={styles.educationItem}>
+            <div className={styles.educationHeader}>
+              <h3>İzmir Institute of Technology (İZTECH)</h3>
+              <span className={styles.educationDate}>2023 - 2024</span>
+            </div>
+            <div className={styles.educationDetails}>
+              <p><strong>{t('cv.department')}:</strong> {t('education.physics')}</p>
+              <p><strong>{t('cv.class')}:</strong> First Year (Completed)</p>
+              <p><strong>GPA:</strong> 3.56/4.00</p>
+              <p><strong>Status:</strong> Transferred to METU</p>
             </div>
           </div>
 
