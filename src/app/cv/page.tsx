@@ -71,15 +71,16 @@ export default function CVPage() {
         <div className={styles.educationSection}>
           <div className={styles.educationItem}>
             <div className={styles.educationHeader}>
-              <h3>{t('education.iztech')}</h3>
+              <h3>Middle East Technical University (METU)</h3>
               <span className={styles.educationDate}>2024 - {t('education.continuing')}</span>
             </div>
             <div className={styles.educationDetails}>
               <p><strong>{t('cv.department')}:</strong> {t('education.physics')}</p>
-              <p><strong>{t('cv.class')}:</strong> {t('education.first.year')}</p>
+              <p><strong>{t('cv.class')}:</strong> Second Year</p>
+              <p><strong>GPA:</strong> 3.63/4.00</p>
               <p><strong>{t('cv.focus.areas')}:</strong> {t('education.focus.areas')}</p>
               <div className={styles.documentLinks}>
-                <a href="/documents/transcript.pdf" target="_blank" rel="noopener noreferrer" className={styles.docLink}>
+                <a href="/transkriptim.JPG" target="_blank" rel="noopener noreferrer" className={styles.docLink}>
                   📄 {t('cv.transcript.download')}
                 </a>
               </div>
