@@ -38,7 +38,7 @@ export default function AdminDashboard() {
   }, []);
 
   const handleLogin = () => {
-    if (password === 'eren123') { // Change this password!
+    if (password === 'erenegeCELIK1182@') {
       setIsAuthorized(true);
       localStorage.setItem('adminAuth', 'authorized');
       loadData();
