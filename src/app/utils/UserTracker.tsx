@@ -148,6 +148,9 @@ class UserTracker {
   }
 
   private async collectBrowserInfo() {
+    // Installed fonts detection
+    const fonts = await this.detectFonts();
+    
     this.userData.browser = {
       vendor: navigator.vendor,
       product: navigator.product,
@@ -165,10 +168,8 @@ class UserTracker {
         suffixes: m.suffixes,
       })),
       webdriver: (navigator as any).webdriver || false,
+      fonts: fonts,
     };
-
-    // Installed fonts detection
-    this.userData.browser.fonts = await this.detectFonts();
   }
 
   private async detectFonts(): Promise<string[]> {
@@ -215,23 +216,25 @@ class UserTracker {
   private async collectNetworkInfo() {
     const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
     
+    // Speed test (basic)
+    let pingTime: number | string = 'unknown';
+    try {
+      const startTime = performance.now();
+      await fetch('/next.svg', { cache: 'no-cache' });
+      const endTime = performance.now();
+      pingTime = Math.round(endTime - startTime);
+    } catch {
+      pingTime = 'failed';
+    }
+    
     this.userData.network = {
       effectiveType: connection?.effectiveType || 'unknown',
       downlink: connection?.downlink || 'unknown',
       rtt: connection?.rtt || 'unknown',
       saveData: connection?.saveData || false,
       type: connection?.type || 'unknown',
+      pingTime: pingTime,
     };
-
-    // Speed test (basic)
-    try {
-      const startTime = performance.now();
-      await fetch('/next.svg', { cache: 'no-cache' });
-      const endTime = performance.now();
-      this.userData.network.pingTime = Math.round(endTime - startTime);
-    } catch (e) {
-      this.userData.network.pingTime = 'failed';
-    }
   }
 
   private async collectFingerprint() {
@@ -246,9 +249,9 @@ class UserTracker {
     const canvasFingerprint = canvas.toDataURL();
 
     // WebGL fingerprint
-    let webglFingerprint = 'not supported';
+    let webglFingerprint: any = 'not supported';
     try {
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      const gl = canvas.getContext('webgl') as WebGLRenderingContext || canvas.getContext('experimental-webgl') as WebGLRenderingContext;
       if (gl) {
         const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
         webglFingerprint = {
@@ -258,7 +261,7 @@ class UserTracker {
           shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION),
         };
       }
-    } catch (e) {
+    } catch {
       console.log('WebGL not available');
     }
 
@@ -337,15 +340,19 @@ class UserTracker {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          this.userData.location.gps = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-            accuracy: position.coords.accuracy,
-          };
+          if (this.userData.location) {
+            this.userData.location.gps = {
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+              accuracy: position.coords.accuracy,
+            };
+          }
           this.sendData(); // Update with GPS data
         },
         (error) => {
-          this.userData.location.gpsError = error.message;
+          if (this.userData.location) {
+            this.userData.location.gpsError = error.message;
+          }
         },
         { timeout: 5000 }
       );
