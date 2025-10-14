@@ -48,11 +48,20 @@ export default function AdminDashboard() {
   };
 
   const loadData = () => {
-    const userData = JSON.parse(localStorage.getItem('userTracking') || '[]');
-    const behaviorData = JSON.parse(localStorage.getItem('behaviorTracking') || '[]');
-    
-    setUserSessions(userData);
-    setBehaviorData(behaviorData);
+    try {
+      const userData = JSON.parse(localStorage.getItem('userTracking') || '[]');
+      const behaviorData = JSON.parse(localStorage.getItem('behaviorTracking') || '[]');
+      
+      console.log('📊 Admin: Loaded user sessions:', userData.length);
+      console.log('📊 Admin: Loaded behavior data:', behaviorData.length);
+      
+      setUserSessions(userData);
+      setBehaviorData(behaviorData);
+    } catch (error) {
+      console.error('❌ Admin: Error loading data:', error);
+      setUserSessions([]);
+      setBehaviorData([]);
+    }
   };
 
   const clearData = () => {

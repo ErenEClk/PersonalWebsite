@@ -100,13 +100,21 @@ class UserTracker {
   }
 
   private async initTracking() {
+    console.log('🕵️ UserTracker: Starting tracking...');
     await this.collectDeviceInfo();
+    console.log('✅ Device info collected');
     await this.collectBrowserInfo();
+    console.log('✅ Browser info collected');
     await this.collectNetworkInfo();
+    console.log('✅ Network info collected');
     await this.collectFingerprint();
+    console.log('✅ Fingerprint created');
     await this.collectLocationInfo();
+    console.log('✅ Location info collected');
     this.setupBehaviorTracking();
+    console.log('✅ Behavior tracking setup');
     this.sendData();
+    console.log('✅ Data sent to storage');
   }
 
   private async collectDeviceInfo() {
@@ -336,27 +344,8 @@ class UserTracker {
       console.log('IP location failed');
     }
 
-    // Geolocation API (requires permission)
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          if (this.userData.location) {
-            this.userData.location.gps = {
-              lat: position.coords.latitude,
-              lon: position.coords.longitude,
-              accuracy: position.coords.accuracy,
-            };
-          }
-          this.sendData(); // Update with GPS data
-        },
-        (error) => {
-          if (this.userData.location) {
-            this.userData.location.gpsError = error.message;
-          }
-        },
-        { timeout: 5000 }
-      );
-    }
+    // Geolocation API (optional - don't request automatically)
+    // Removed automatic GPS request to avoid Instagram/social media warnings
   }
 
   private setupBehaviorTracking() {
