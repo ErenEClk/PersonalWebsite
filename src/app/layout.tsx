@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from './contexts/LanguageContext';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import UserTrackingWrapper from './components/UserTrackingWrapper';
 // import ThreeBodyBackground from "./ThreeBodyBackground";
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({
     <html lang="tr">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <GoogleAnalytics measurementId="G-0T9H646SWH" />
+        <UserTrackingWrapper />
         <LanguageProvider>
           {/* <ThreeBodyBackground /> */}
           <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
