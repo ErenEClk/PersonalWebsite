@@ -189,28 +189,31 @@ class UserTracker {
     // Audio fingerprint
     let audioFingerprint = 'not supported';
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const analyser = audioContext.createAnalyser();
-      const gainNode = audioContext.createGain();
-      
-      oscillator.type = 'triangle';
-      oscillator.frequency.setValueAtTime(10000, audioContext.currentTime);
-      
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-      oscillator.connect(analyser);
-      analyser.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      oscillator.start(0);
-      
-      const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-      analyser.getByteFrequencyData(frequencyData);
-      
-      audioFingerprint = Array.from(frequencyData).join(',');
-      
-      oscillator.stop();
-      audioContext.close();
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioContextClass) {
+        const audioContext = new AudioContextClass();
+        const oscillator = audioContext.createOscillator();
+        const analyser = audioContext.createAnalyser();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.type = 'triangle';
+        oscillator.frequency.setValueAtTime(10000, audioContext.currentTime);
+        
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        oscillator.connect(analyser);
+        analyser.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.start(0);
+        
+        const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(frequencyData);
+        
+        audioFingerprint = Array.from(frequencyData).join(',');
+        
+        oscillator.stop();
+        audioContext.close();
+      }
     } catch (e) {
       console.log('Audio fingerprint failed');
     }
@@ -372,8 +375,8 @@ class UserTracker {
     localStorage.setItem('userTracking', JSON.stringify(existingData));
 
     // Also send to Google Analytics as custom event
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'user_fingerprint', {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'user_fingerprint', {
         custom_parameter_fingerprint: this.userData.fingerprint,
         custom_parameter_device: JSON.stringify(this.userData.device),
       });

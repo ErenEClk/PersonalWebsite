@@ -217,7 +217,7 @@ export default function AdminDashboard() {
                       <div>
                         <h4 style={{ color: '#ffb347', margin: '0 0 10px 0' }}>🌐 Browser Info</h4>
                         <p><strong>Browser:</strong> {session.browser?.appName}</p>
-                        <p><strong>Version:</strong> {session.browser?.appVersion?.split(' ')[0]}</p>
+                        <p><strong>Version:</strong> {session.browser?.appVersion?.split(' ')[0] || 'Unknown'}</p>
                         <p><strong>Plugins:</strong> {session.browser?.plugins?.length || 0}</p>
                         <p><strong>Fonts:</strong> {session.browser?.fonts?.length || 0} detected</p>
                         <p><strong>WebDriver:</strong> {session.browser?.webdriver ? 'Yes (Bot?)' : 'No'}</p>
