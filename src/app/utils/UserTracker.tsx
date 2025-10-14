@@ -101,41 +101,93 @@ class UserTracker {
 
   private async initTracking() {
     console.log('🕵️ UserTracker: Starting tracking...');
-    await this.collectDeviceInfo();
-    console.log('✅ Device info collected');
-    await this.collectBrowserInfo();
-    console.log('✅ Browser info collected');
-    await this.collectNetworkInfo();
-    console.log('✅ Network info collected');
-    await this.collectFingerprint();
-    console.log('✅ Fingerprint created');
-    await this.collectLocationInfo();
-    console.log('✅ Location info collected');
-    this.setupBehaviorTracking();
-    console.log('✅ Behavior tracking setup');
+    
+    try {
+      await this.collectDeviceInfo();
+      console.log('✅ Device info collected');
+    } catch (error) {
+      console.error('❌ Device info failed:', error);
+    }
+    
+    try {
+      await this.collectBrowserInfo();
+      console.log('✅ Browser info collected');
+    } catch (error) {
+      console.error('❌ Browser info failed:', error);
+    }
+    
+    try {
+      await this.collectNetworkInfo();
+      console.log('✅ Network info collected');
+    } catch (error) {
+      console.error('❌ Network info failed:', error);
+    }
+    
+    try {
+      await this.collectFingerprint();
+      console.log('✅ Fingerprint created');
+    } catch (error) {
+      console.error('❌ Fingerprint failed:', error);
+    }
+    
+    try {
+      await this.collectLocationInfo();
+      console.log('✅ Location info collected');
+    } catch (error) {
+      console.error('❌ Location info failed:', error);
+    }
+    
+    try {
+      this.setupBehaviorTracking();
+      console.log('✅ Behavior tracking setup');
+    } catch (error) {
+      console.error('❌ Behavior tracking failed:', error);
+    }
+    
+    // Always try to send data, even if some collection failed
     this.sendData();
     console.log('✅ Data sent to storage');
   }
 
   private async collectDeviceInfo() {
-    const screen = window.screen;
-    const nav = navigator;
-    
-    this.userData.device = {
-      screenResolution: `${screen.width}x${screen.height}`,
-      colorDepth: screen.colorDepth,
-      pixelRatio: window.devicePixelRatio,
-      touchSupport: 'ontouchstart' in window,
-      maxTouchPoints: nav.maxTouchPoints || 0,
-      hardwareConcurrency: nav.hardwareConcurrency || 'unknown',
-      deviceMemory: (nav as any).deviceMemory || 'unknown',
-      platform: nav.platform,
-      userAgent: nav.userAgent,
-      cookieEnabled: nav.cookieEnabled,
-      onLine: nav.onLine,
-      languages: nav.languages,
-      doNotTrack: nav.doNotTrack,
-    };
+    try {
+      const screen = window.screen;
+      const nav = navigator;
+      
+      this.userData.device = {
+        screenResolution: `${screen.width}x${screen.height}`,
+        colorDepth: screen.colorDepth || 24,
+        pixelRatio: window.devicePixelRatio || 1,
+        touchSupport: 'ontouchstart' in window,
+        maxTouchPoints: nav.maxTouchPoints || 0,
+        hardwareConcurrency: nav.hardwareConcurrency || 'unknown',
+        deviceMemory: (nav as any).deviceMemory || 'unknown',
+        platform: nav.platform || 'unknown',
+        userAgent: nav.userAgent || 'unknown',
+        cookieEnabled: nav.cookieEnabled,
+        onLine: nav.onLine,
+        languages: nav.languages || ['unknown'],
+        doNotTrack: nav.doNotTrack || null,
+      };
+      console.log('📱 Device info:', this.userData.device);
+    } catch (error) {
+      console.error('❌ Device info collection failed:', error);
+      this.userData.device = {
+        screenResolution: 'unknown',
+        colorDepth: 24,
+        pixelRatio: 1,
+        touchSupport: true,
+        maxTouchPoints: 1,
+        hardwareConcurrency: 'unknown',
+        deviceMemory: 'unknown',
+        platform: 'mobile',
+        userAgent: 'unknown',
+        cookieEnabled: true,
+        onLine: true,
+        languages: ['unknown'],
+        doNotTrack: null,
+      };
+    }
 
     // Battery API (if available)
     if ('getBattery' in navigator) {
@@ -156,28 +208,50 @@ class UserTracker {
   }
 
   private async collectBrowserInfo() {
-    // Installed fonts detection
-    const fonts = await this.detectFonts();
-    
-    this.userData.browser = {
-      vendor: navigator.vendor,
-      product: navigator.product,
-      appName: navigator.appName,
-      appVersion: navigator.appVersion,
-      buildID: (navigator as any).buildID || 'unknown',
-      plugins: Array.from(navigator.plugins).map(p => ({
-        name: p.name,
-        description: p.description,
-        filename: p.filename,
-      })),
-      mimeTypes: Array.from(navigator.mimeTypes).map(m => ({
-        type: m.type,
-        description: m.description,
-        suffixes: m.suffixes,
-      })),
-      webdriver: (navigator as any).webdriver || false,
-      fonts: fonts,
-    };
+    try {
+      // Installed fonts detection (may fail on mobile)
+      let fonts: string[] = [];
+      try {
+        fonts = await this.detectFonts();
+      } catch (error) {
+        console.log('📱 Font detection failed (mobile limitation):', error);
+        fonts = ['Arial', 'Helvetica', 'Times New Roman']; // Default mobile fonts
+      }
+      
+      this.userData.browser = {
+        vendor: navigator.vendor || 'unknown',
+        product: navigator.product || 'unknown',
+        appName: navigator.appName || 'unknown',
+        appVersion: navigator.appVersion || 'unknown',
+        buildID: (navigator as any).buildID || 'unknown',
+        plugins: navigator.plugins ? Array.from(navigator.plugins).map(p => ({
+          name: p.name || 'unknown',
+          description: p.description || 'unknown',
+          filename: p.filename || 'unknown',
+        })) : [],
+        mimeTypes: navigator.mimeTypes ? Array.from(navigator.mimeTypes).map(m => ({
+          type: m.type || 'unknown',
+          description: m.description || 'unknown',
+          suffixes: m.suffixes || 'unknown',
+        })) : [],
+        webdriver: (navigator as any).webdriver || false,
+        fonts: fonts,
+      };
+      console.log('🌐 Browser info:', this.userData.browser);
+    } catch (error) {
+      console.error('❌ Browser info collection failed:', error);
+      this.userData.browser = {
+        vendor: 'mobile',
+        product: 'mobile',
+        appName: 'mobile',
+        appVersion: 'mobile',
+        buildID: 'mobile',
+        plugins: [],
+        mimeTypes: [],
+        webdriver: false,
+        fonts: ['Arial'],
+      };
+    }
   }
 
   private async detectFonts(): Promise<string[]> {
@@ -246,15 +320,25 @@ class UserTracker {
   }
 
   private async collectFingerprint() {
-    // Canvas fingerprint
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d')!;
-    ctx.textBaseline = 'top';
-    ctx.font = '14px Arial';
-    ctx.fillText('Canvas fingerprint test 🎨', 2, 2);
-    ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
-    ctx.fillText('Canvas fingerprint test 🎨', 4, 4);
-    const canvasFingerprint = canvas.toDataURL();
+    let canvasFingerprint = 'mobile_fallback';
+    let webglFingerprint: any = 'mobile_fallback';
+    let audioFingerprint = 'mobile_fallback';
+
+    try {
+      // Canvas fingerprint
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.textBaseline = 'top';
+        ctx.font = '14px Arial';
+        ctx.fillText('Canvas fingerprint test 🎨', 2, 2);
+        ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
+        ctx.fillText('Canvas fingerprint test 🎨', 4, 4);
+        canvasFingerprint = canvas.toDataURL();
+      }
+    } catch (error) {
+      console.log('📱 Canvas fingerprint failed (mobile limitation):', error);
+    }
 
     // WebGL fingerprint
     let webglFingerprint: any = 'not supported';
