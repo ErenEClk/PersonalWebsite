@@ -1,14 +1,88 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+interface DeviceInfo {
+  screenResolution: string;
+  colorDepth: number;
+  pixelRatio: number;
+  touchSupport: boolean;
+  maxTouchPoints: number;
+  hardwareConcurrency: number | string;
+  deviceMemory: number | string;
+  platform: string;
+  userAgent: string;
+  cookieEnabled: boolean;
+  onLine: boolean;
+  languages: readonly string[];
+  doNotTrack: string | null;
+  battery?: {
+    level: number;
+    charging: boolean;
+    chargingTime: number;
+    dischargingTime: number;
+  };
+}
+
+interface BrowserInfo {
+  vendor: string;
+  product: string;
+  appName: string;
+  appVersion: string;
+  buildID: string;
+  plugins: Array<{
+    name: string;
+    description: string;
+    filename: string;
+  }>;
+  mimeTypes: Array<{
+    type: string;
+    description: string;
+    suffixes: string;
+  }>;
+  webdriver: boolean;
+  fonts: string[];
+}
+
+interface NetworkInfo {
+  effectiveType: string;
+  downlink: number | string;
+  rtt: number | string;
+  saveData: boolean;
+  type: string;
+  pingTime: number | string;
+}
+
+interface LocationInfo {
+  timezone: string;
+  locale: string;
+  currency: string;
+  ip?: {
+    ip: string;
+    city: string;
+    region: string;
+    country: string;
+    isp: string;
+    lat: number;
+    lon: number;
+  };
+  gps?: {
+    lat: number;
+    lon: number;
+    accuracy: number;
+  };
+  gpsError?: string;
+}
 
 interface UserData {
   sessionId: string;
   timestamp: number;
   fingerprint: string;
-  device: any;
-  browser: any;
-  network: any;
-  behavior: any;
-  location: any;
+  device: DeviceInfo;
+  browser: BrowserInfo;
+  network: NetworkInfo;
+  behavior: unknown[];
+  location: LocationInfo;
 }
 
 class UserTracker {
@@ -59,13 +133,15 @@ class UserTracker {
     if ('getBattery' in navigator) {
       try {
         const battery = await (navigator as any).getBattery();
-        this.userData.device.battery = {
-          level: Math.round(battery.level * 100),
-          charging: battery.charging,
-          chargingTime: battery.chargingTime,
-          dischargingTime: battery.dischargingTime,
-        };
-      } catch (e) {
+        if (this.userData.device) {
+          this.userData.device.battery = {
+            level: Math.round(battery.level * 100),
+            charging: battery.charging,
+            chargingTime: battery.chargingTime,
+            dischargingTime: battery.dischargingTime,
+          };
+        }
+      } catch {
         console.log('Battery API not available');
       }
     }

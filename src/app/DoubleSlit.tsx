@@ -78,7 +78,7 @@ export default function DoubleSlit() {
       
       setPhotonActive(false);
     }
-  }, [scrollY, scrollDirection, photonHits.length]);
+  }, [scrollY, scrollDirection, photonHits.length, photonActive]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -289,7 +289,7 @@ export default function DoubleSlit() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [scrollY, scrollVelocity, photonHits]);
+  }, [scrollY, scrollVelocity, photonHits, photonActive]);
 
   return (
     <canvas
