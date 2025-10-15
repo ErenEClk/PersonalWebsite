@@ -530,6 +530,9 @@ class UserTracker {
     existingData.push(data);
     localStorage.setItem('userTracking', JSON.stringify(existingData));
 
+    // YENI: Verileri merkezi bir endpoint'e gönder
+    this.sendToServer(data);
+
     // Also send to Google Analytics as custom event
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'user_fingerprint', {
@@ -539,8 +542,26 @@ class UserTracker {
     }
   }
 
+  private async sendToServer(data: any) {
+    try {
+      // Kendi API endpoint'imize gönder
+      const response = await fetch('/api/tracking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      console.log('📤 Data sent to server:', response.ok);
+    } catch (error) {
+      console.log('❌ Server send failed:', error);
+      // Fallback: localStorage'a kaydet
+    }
+  }
+
   private sendBehaviorData() {
     const data = {
+      type: 'behavior',
       sessionId: this.sessionId,
       behaviorData: this.behaviorData.slice(),
       timestamp: Date.now(),
@@ -548,13 +569,31 @@ class UserTracker {
 
     console.log('🎯 Behavior Data:', data);
     
-    // Store behavior data
+    // Store behavior data locally
     const existingBehavior = JSON.parse(localStorage.getItem('behaviorTracking') || '[]');
     existingBehavior.push(data);
     localStorage.setItem('behaviorTracking', JSON.stringify(existingBehavior));
 
+    // Send to server
+    this.sendBehaviorToServer(data);
+
     // Clear sent data
     this.behaviorData = [];
+  }
+
+  private async sendBehaviorToServer(data: any) {
+    try {
+      const response = await fetch('/api/tracking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      console.log('📤 Behavior data sent to server:', response.ok);
+    } catch (error) {
+      console.log('❌ Behavior server send failed:', error);
+    }
   }
 
   // Public method to get current session data

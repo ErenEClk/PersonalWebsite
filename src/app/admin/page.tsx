@@ -47,20 +47,35 @@ export default function AdminDashboard() {
     }
   };
 
-  const loadData = () => {
+  const loadData = async () => {
     try {
-      const userData = JSON.parse(localStorage.getItem('userTracking') || '[]');
-      const behaviorData = JSON.parse(localStorage.getItem('behaviorTracking') || '[]');
+      // API'den merkezi verileri çek
+      const response = await fetch(`/api/tracking?password=${encodeURIComponent('erenegeCELIK1182@')}`);
       
-      console.log('📊 Admin: Loaded user sessions:', userData.length);
-      console.log('📊 Admin: Loaded behavior data:', behaviorData.length);
-      
-      setUserSessions(userData);
-      setBehaviorData(behaviorData);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('📊 Admin: Loaded from server - Sessions:', data.userSessions.length, 'Behavior:', data.behaviorData.length);
+        setUserSessions(data.userSessions);
+        setBehaviorData(data.behaviorData);
+      } else {
+        throw new Error('API request failed');
+      }
     } catch (error) {
-      console.error('❌ Admin: Error loading data:', error);
-      setUserSessions([]);
-      setBehaviorData([]);
+      console.error('❌ Admin: API failed, falling back to localStorage:', error);
+      // Fallback: localStorage'dan yükle
+      try {
+        const userData = JSON.parse(localStorage.getItem('userTracking') || '[]');
+        const behaviorData = JSON.parse(localStorage.getItem('behaviorTracking') || '[]');
+        
+        console.log('📊 Admin: Loaded from localStorage - Sessions:', userData.length, 'Behavior:', behaviorData.length);
+        
+        setUserSessions(userData);
+        setBehaviorData(behaviorData);
+      } catch (localError) {
+        console.error('❌ Admin: localStorage also failed:', localError);
+        setUserSessions([]);
+        setBehaviorData([]);
+      }
     }
   };
 
