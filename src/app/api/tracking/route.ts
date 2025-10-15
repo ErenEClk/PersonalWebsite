@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// In-memory storage (production'da database kullan)
+// In-memory storage (production'da database kullan) - Updated
 let trackingData: any[] = [];
 let behaviorData: any[] = [];
 
