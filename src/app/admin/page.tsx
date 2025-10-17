@@ -66,9 +66,20 @@ export default function AdminDashboard() {
       // localStorage'dan da verileri çek
       const localData = { sessions: [] as any[], behavior: [] as any[] };
       try {
+        // Debug: localStorage key'lerini kontrol et
+        console.log('🔍 Admin: localStorage keys:', Object.keys(localStorage));
+        console.log('🔍 Admin: userTracker_sessions raw:', localStorage.getItem('userTracker_sessions'));
+        console.log('🔍 Admin: userTracker_behavior raw:', localStorage.getItem('userTracker_behavior'));
+        
         localData.sessions = JSON.parse(localStorage.getItem('userTracker_sessions') || '[]');
         localData.behavior = JSON.parse(localStorage.getItem('userTracker_behavior') || '[]');
         console.log('💾 Admin: localStorage data - Sessions:', localData.sessions.length, 'Behavior:', localData.behavior.length);
+        
+        // Eski key'leri de kontrol et
+        const oldSessions = localStorage.getItem('userTracking');
+        const oldBehavior = localStorage.getItem('behaviorTracking');
+        console.log('🔍 Admin: Old keys - userTracking:', oldSessions ? 'EXISTS' : 'NULL', 'behaviorTracking:', oldBehavior ? 'EXISTS' : 'NULL');
+        
       } catch (localError) {
         console.error('❌ Admin: localStorage read failed:', localError);
       }
