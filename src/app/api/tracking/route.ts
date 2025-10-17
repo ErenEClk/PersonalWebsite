@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 
-// Vercel KV kullanarak kalıcı storage
+// Create Redis client using REDIS_URL
+const redis = new Redis({
+  url: process.env.REDIS_URL || '',
+  token: '', // URL already includes auth
+});
+
+// Storage keys
 const SESSIONS_KEY = 'userTracker:sessions';
 const BEHAVIOR_KEY = 'userTracker:behavior';
 
@@ -12,19 +18,19 @@ export async function POST(request: NextRequest) {
     console.log('📦 Received data type:', data.type || 'user_session');
     
     if (data.type === 'behavior') {
-      // Behavior verilerini KV'ye ekle
-      await kv.rpush(BEHAVIOR_KEY, JSON.stringify(data));
-      const totalBehavior = await kv.llen(BEHAVIOR_KEY);
-      console.log('📊 Behavior data saved to KV. Total behavior entries:', totalBehavior);
+      // Behavior verilerini Redis'e ekle
+      await redis.rpush(BEHAVIOR_KEY, JSON.stringify(data));
+      const totalBehavior = await redis.llen(BEHAVIOR_KEY);
+      console.log('📊 Behavior data saved to Redis. Total behavior entries:', totalBehavior);
     } else {
-      // Session verilerini KV'ye ekle
-      await kv.rpush(SESSIONS_KEY, JSON.stringify(data));
-      const totalSessions = await kv.llen(SESSIONS_KEY);
-      console.log('📊 User session saved to KV. Total sessions:', totalSessions);
+      // Session verilerini Redis'e ekle
+      await redis.rpush(SESSIONS_KEY, JSON.stringify(data));
+      const totalSessions = await redis.llen(SESSIONS_KEY);
+      console.log('📊 User session saved to Redis. Total sessions:', totalSessions);
       console.log('🔍 Session fingerprint:', data.fingerprint?.substring(0, 10) + '...');
     }
     
-    const totalSessions = await kv.llen(SESSIONS_KEY);
+    const totalSessions = await redis.llen(SESSIONS_KEY);
     return NextResponse.json({ success: true, totalSessions });
   } catch (error) {
     console.error('❌ Tracking API POST error:', error);
@@ -45,9 +51,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     
-    // KV'den verileri çek
-    const sessionsRaw = await kv.lrange(SESSIONS_KEY, 0, -1) || [];
-    const behaviorRaw = await kv.lrange(BEHAVIOR_KEY, 0, -1) || [];
+    // Redis'ten verileri çek
+    const sessionsRaw = await redis.lrange(SESSIONS_KEY, 0, -1) || [];
+    const behaviorRaw = await redis.lrange(BEHAVIOR_KEY, 0, -1) || [];
     
     // Parse JSON strings
     const trackingData = sessionsRaw.map((item: any) => 
@@ -57,7 +63,7 @@ export async function GET(request: NextRequest) {
       typeof item === 'string' ? JSON.parse(item) : item
     );
     
-    console.log('📊 Returning data from KV - Sessions:', trackingData.length, 'Behavior:', behaviorData.length);
+    console.log('📊 Returning data from Redis - Sessions:', trackingData.length, 'Behavior:', behaviorData.length);
     
     return NextResponse.json({
       userSessions: trackingData,
