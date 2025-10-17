@@ -40,15 +40,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
         {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9255607935991101"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-        
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <GoogleAnalytics measurementId="G-0T9H646SWH" />
         <UserTrackingWrapper />
         <LanguageProvider>
