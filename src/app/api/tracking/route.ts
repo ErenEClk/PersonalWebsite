@@ -56,9 +56,11 @@ export async function GET(request: NextRequest) {
     const behaviorRaw = await redis.lrange(BEHAVIOR_KEY, 0, -1) || [];
     
     // Parse JSON strings
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const trackingData = sessionsRaw.map((item: any) => 
       typeof item === 'string' ? JSON.parse(item) : item
     );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const behaviorData = behaviorRaw.map((item: any) => 
       typeof item === 'string' ? JSON.parse(item) : item
     );
