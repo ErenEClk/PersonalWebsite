@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Redis } from '@upstash/redis';
+import Redis from 'ioredis';
 
 // Create Redis client using REDIS_URL
-const redis = new Redis({
-  url: process.env.REDIS_URL || '',
-  token: '', // URL already includes auth
-});
+const redis = new Redis(process.env.REDIS_URL || '');
 
 // Storage keys
 const SESSIONS_KEY = 'userTracker:sessions';
