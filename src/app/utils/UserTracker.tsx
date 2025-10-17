@@ -89,10 +89,33 @@ class UserTracker {
   private sessionId: string;
   private userData: Partial<UserData> = {};
   private behaviorData: any[] = [];
+  private sessionSent: boolean = false; // Track if session data already sent
 
   constructor() {
-    this.sessionId = this.generateSessionId();
+    this.sessionId = this.getOrCreateSessionId();
     this.initTracking();
+  }
+
+  private getOrCreateSessionId(): string {
+    // Check if session already exists in localStorage
+    const existingSessionId = localStorage.getItem('userTracker_sessionId');
+    
+    if (existingSessionId) {
+      console.log('♻️ Reusing existing session ID:', existingSessionId);
+      // Also check if session was already sent
+      const sessionSent = localStorage.getItem('userTracker_sessionSent');
+      if (sessionSent === 'true') {
+        this.sessionSent = true;
+        console.log('✅ Session data already sent for this session');
+      }
+      return existingSessionId;
+    }
+    
+    // Create new session ID
+    const newSessionId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    localStorage.setItem('userTracker_sessionId', newSessionId);
+    console.log('🆕 Created new session ID:', newSessionId);
+    return newSessionId;
   }
 
   private generateSessionId(): string {
@@ -518,6 +541,12 @@ class UserTracker {
   }
 
   private sendData() {
+    // Only send session data once per session
+    if (this.sessionSent) {
+      console.log('⏭️ Session data already sent for this session, skipping...');
+      return;
+    }
+
     const data = {
       sessionId: this.sessionId,
       timestamp: Date.now(),
@@ -536,6 +565,10 @@ class UserTracker {
 
     // YENI: Verileri merkezi bir endpoint'e gönder
     this.sendToServer(data);
+    
+    // Mark session as sent
+    this.sessionSent = true;
+    localStorage.setItem('userTracker_sessionSent', 'true');
 
     // Also send to Google Analytics as custom event
     if (typeof window !== 'undefined' && (window as any).gtag) {
