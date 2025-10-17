@@ -324,9 +324,11 @@ class UserTracker {
     let webglFingerprint: any = 'mobile_fallback';
     let audioFingerprint = 'mobile_fallback';
 
+    // Create canvas element for both canvas and WebGL fingerprinting
+    const canvas = document.createElement('canvas');
+
     try {
       // Canvas fingerprint
-      const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (ctx) {
         ctx.textBaseline = 'top';
