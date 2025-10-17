@@ -49,42 +49,68 @@ export default function AdminDashboard() {
 
   const loadData = async () => {
     try {
+      console.log('🔄 Admin: Loading data from API and localStorage...');
+      
       // API'den merkezi verileri çek
       const response = await fetch(`/api/tracking?password=${encodeURIComponent('erenegeCELIK1182@')}`);
       
+      let apiData = { userSessions: [], behaviorData: [] };
+      
       if (response.ok) {
-        const data = await response.json();
-        console.log('📊 Admin: Loaded from server - Sessions:', data.userSessions.length, 'Behavior:', data.behaviorData.length);
-        setUserSessions(data.userSessions);
-        setBehaviorData(data.behaviorData);
+        apiData = await response.json();
+        console.log('📊 Admin: API data - Sessions:', apiData.userSessions.length, 'Behavior:', apiData.behaviorData.length);
       } else {
-        throw new Error('API request failed');
+        console.error('❌ Admin: API request failed:', response.status);
       }
-    } catch (error) {
-      console.error('❌ Admin: API failed, falling back to localStorage:', error);
-      // Fallback: localStorage'dan yükle
+      
+      // localStorage'dan da verileri çek
+      let localData = { sessions: [], behavior: [] };
       try {
-        const userData = JSON.parse(localStorage.getItem('userTracking') || '[]');
-        const behaviorData = JSON.parse(localStorage.getItem('behaviorTracking') || '[]');
-        
-        console.log('📊 Admin: Loaded from localStorage - Sessions:', userData.length, 'Behavior:', behaviorData.length);
-        
-        setUserSessions(userData);
-        setBehaviorData(behaviorData);
+        localData.sessions = JSON.parse(localStorage.getItem('userTracker_sessions') || '[]');
+        localData.behavior = JSON.parse(localStorage.getItem('userTracker_behavior') || '[]');
+        console.log('💾 Admin: localStorage data - Sessions:', localData.sessions.length, 'Behavior:', localData.behavior.length);
       } catch (localError) {
-        console.error('❌ Admin: localStorage also failed:', localError);
-        setUserSessions([]);
-        setBehaviorData([]);
+        console.error('❌ Admin: localStorage read failed:', localError);
       }
+      
+      // Verileri birleştir (API + localStorage)
+      const allSessions = [...apiData.userSessions, ...localData.sessions];
+      const allBehavior = [...apiData.behaviorData, ...localData.behavior];
+      
+      // Duplikatları kaldır (sessionId ve timestamp'e göre)
+      const uniqueSessions = allSessions.filter((session, index, self) => 
+        index === self.findIndex(s => s.sessionId === session.sessionId && s.timestamp === session.timestamp)
+      );
+      
+      const uniqueBehavior = allBehavior.filter((behavior, index, self) => 
+        index === self.findIndex(b => b.sessionId === behavior.sessionId && b.timestamp === behavior.timestamp)
+      );
+      
+      console.log('🔄 Admin: Merged data - Sessions:', uniqueSessions.length, 'Behavior:', uniqueBehavior.length);
+      console.log('📈 Admin: Sources - API Sessions:', apiData.userSessions.length, 'Local Sessions:', localData.sessions.length);
+      
+      setUserSessions(uniqueSessions);
+      setBehaviorData(uniqueBehavior);
+      
+    } catch (error) {
+      console.error('❌ Admin: Data loading failed:', error);
+      setUserSessions([]);
+      setBehaviorData([]);
     }
   };
 
   const clearData = () => {
     if (confirm('Are you sure you want to clear all tracking data?')) {
+      // Clear localStorage
+      localStorage.removeItem('userTracker_sessions');
+      localStorage.removeItem('userTracker_behavior');
+      // Clear old keys too (backward compatibility)
       localStorage.removeItem('userTracking');
       localStorage.removeItem('behaviorTracking');
+      
       setUserSessions([]);
       setBehaviorData([]);
+      console.log('🗑️ Admin: All tracking data cleared');
     }
   };
 

@@ -548,8 +548,12 @@ class UserTracker {
 
   private async sendToServer(data: any) {
     console.log('🚀 UserTracker: Attempting to send data to API...');
+    
+    // Always save to localStorage first (guaranteed to work)
+    this.saveToLocalStorage(data);
+    
     try {
-      // Kendi API endpoint'imize gönder
+      // Then try to send to API
       const response = await fetch('/api/tracking', {
         method: 'POST',
         headers: {
@@ -568,7 +572,7 @@ class UserTracker {
       }
     } catch (error) {
       console.error('❌ Server send failed:', error);
-      console.log('📝 Falling back to localStorage only');
+      console.log('💾 Data saved to localStorage as fallback');
     }
   }
 
@@ -596,6 +600,10 @@ class UserTracker {
 
   private async sendBehaviorToServer(data: any) {
     console.log('🎯 UserTracker: Sending behavior data to API...');
+    
+    // Always save to localStorage first
+    this.saveToLocalStorage(data);
+    
     try {
       const response = await fetch('/api/tracking', {
         method: 'POST',
@@ -614,6 +622,26 @@ class UserTracker {
       }
     } catch (error) {
       console.error('❌ Behavior server send failed:', error);
+      console.log('💾 Behavior data saved to localStorage as fallback');
+    }
+  }
+
+  // Save data to localStorage for persistence
+  private saveToLocalStorage(data: any) {
+    try {
+      const storageKey = data.type === 'behavior' ? 'userTracker_behavior' : 'userTracker_sessions';
+      const existingData = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      existingData.push(data);
+      
+      // Keep only last 100 entries to prevent storage overflow
+      if (existingData.length > 100) {
+        existingData.splice(0, existingData.length - 100);
+      }
+      
+      localStorage.setItem(storageKey, JSON.stringify(existingData));
+      console.log(`💾 Data saved to localStorage (${storageKey}). Total: ${existingData.length}`);
+    } catch (error) {
+      console.error('❌ Error saving to localStorage:', error);
     }
   }
 
@@ -624,6 +652,18 @@ class UserTracker {
       userData: this.userData,
       behaviorData: this.behaviorData,
     };
+  }
+
+  // Public method to get localStorage data
+  public static getLocalStorageData() {
+    try {
+      const sessions = JSON.parse(localStorage.getItem('userTracker_sessions') || '[]');
+      const behavior = JSON.parse(localStorage.getItem('userTracker_behavior') || '[]');
+      return { sessions, behavior };
+    } catch (error) {
+      console.error('❌ Error reading localStorage:', error);
+      return { sessions: [], behavior: [] };
+    }
   }
 }
 
