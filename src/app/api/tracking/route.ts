@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // In-memory storage (production'da database kullan) - Test commit
-let trackingData: any[] = [];
-let behaviorData: any[] = [];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const trackingData: any[] = [];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const behaviorData: any[] = [];
 
 export async function POST(request: NextRequest) {
   console.log('🔥 API POST called at:', new Date().toISOString());
