@@ -543,6 +543,7 @@ class UserTracker {
   }
 
   private async sendToServer(data: any) {
+    console.log('🚀 UserTracker: Attempting to send data to API...');
     try {
       // Kendi API endpoint'imize gönder
       const response = await fetch('/api/tracking', {
@@ -552,10 +553,18 @@ class UserTracker {
         },
         body: JSON.stringify(data),
       });
-      console.log('📤 Data sent to server:', response.ok);
+      
+      console.log('📤 API Response Status:', response.status, response.ok);
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('✅ Data successfully sent to API. Total sessions:', result.totalSessions);
+      } else {
+        console.error('❌ API returned error status:', response.status);
+      }
     } catch (error) {
-      console.log('❌ Server send failed:', error);
-      // Fallback: localStorage'a kaydet
+      console.error('❌ Server send failed:', error);
+      console.log('📝 Falling back to localStorage only');
     }
   }
 
@@ -582,6 +591,7 @@ class UserTracker {
   }
 
   private async sendBehaviorToServer(data: any) {
+    console.log('🎯 UserTracker: Sending behavior data to API...');
     try {
       const response = await fetch('/api/tracking', {
         method: 'POST',
@@ -590,9 +600,16 @@ class UserTracker {
         },
         body: JSON.stringify(data),
       });
-      console.log('📤 Behavior data sent to server:', response.ok);
+      
+      console.log('📤 Behavior API Response:', response.status, response.ok);
+      
+      if (response.ok) {
+        console.log('✅ Behavior data successfully sent to API');
+      } else {
+        console.error('❌ Behavior API returned error:', response.status);
+      }
     } catch (error) {
-      console.log('❌ Behavior server send failed:', error);
+      console.error('❌ Behavior server send failed:', error);
     }
   }
 
