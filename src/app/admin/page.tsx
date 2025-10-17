@@ -64,7 +64,7 @@ export default function AdminDashboard() {
       }
       
       // localStorage'dan da verileri çek
-      let localData = { sessions: [], behavior: [] };
+      const localData = { sessions: [] as any[], behavior: [] as any[] };
       try {
         localData.sessions = JSON.parse(localStorage.getItem('userTracker_sessions') || '[]');
         localData.behavior = JSON.parse(localStorage.getItem('userTracker_behavior') || '[]');
