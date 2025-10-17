@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// In-memory storage (production'da database kullan) - Updated
+// In-memory storage (production'da database kullan) - Test commit
 let trackingData: any[] = [];
 let behaviorData: any[] = [];
 
