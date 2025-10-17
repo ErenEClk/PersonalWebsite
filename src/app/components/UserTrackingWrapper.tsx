@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 
 export default function UserTrackingWrapper() {
   useEffect(() => {
-    // Only run on client side and not in admin page
-    if (typeof window !== 'undefined' && !window.location.pathname.includes('/admin')) {
+    // Only run on client side (allow admin page too for testing)
+    if (typeof window !== 'undefined') {
       console.log('🚀 UserTrackingWrapper: Initializing tracker...');
       // Dynamic import to avoid SSR issues
       import('../utils/UserTracker').then((module) => {
@@ -15,7 +15,7 @@ export default function UserTrackingWrapper() {
         console.error('❌ Failed to load UserTracker:', error);
       });
     } else {
-      console.log('⏭️ UserTrackingWrapper: Skipping (admin page or SSR)');
+      console.log('⏭️ UserTrackingWrapper: Skipping (SSR)');
     }
   }, []);
 
