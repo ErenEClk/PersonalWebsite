@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { LanguageProvider } from './contexts/LanguageContext';
 import GoogleAnalytics from './components/GoogleAnalytics';
@@ -40,6 +41,14 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9255607935991101"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        
         <GoogleAnalytics measurementId="G-0T9H646SWH" />
         <UserTrackingWrapper />
         <LanguageProvider>
