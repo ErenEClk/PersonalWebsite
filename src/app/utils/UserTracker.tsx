@@ -341,7 +341,6 @@ class UserTracker {
     }
 
     // WebGL fingerprint
-    let webglFingerprint: any = 'not supported';
     try {
       const gl = canvas.getContext('webgl') as WebGLRenderingContext || canvas.getContext('experimental-webgl') as WebGLRenderingContext;
       if (gl) {
@@ -352,13 +351,15 @@ class UserTracker {
           version: gl.getParameter(gl.VERSION),
           shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION),
         };
+      } else {
+        webglFingerprint = 'not supported';
       }
     } catch {
       console.log('WebGL not available');
+      webglFingerprint = 'not supported';
     }
 
     // Audio fingerprint
-    let audioFingerprint = 'not supported';
     try {
       const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
       if (AudioContextClass) {
@@ -387,6 +388,7 @@ class UserTracker {
       }
     } catch (e) {
       console.log('Audio fingerprint failed');
+      audioFingerprint = 'not supported';
     }
 
     this.userData.fingerprint = this.hashCode(
