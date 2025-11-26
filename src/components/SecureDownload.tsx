@@ -31,7 +31,7 @@ export default function SecureDownload() {
       } else {
         setError(true);
       }
-    } catch (err) {
+    } catch {
       setError(true);
     }
   };
