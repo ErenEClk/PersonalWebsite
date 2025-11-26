@@ -6,7 +6,7 @@ export async function POST(req: Request) {
 
     // Şimdilik basit bir şifre kullanıyoruz. 
     // Daha sonra bunu environment variable'a taşıyabilirsin.
-    const CORRECT_PASSWORD = "GridNode2024!"; 
+    const CORRECT_PASSWORD = "çağan31"; 
 
     if (password === CORRECT_PASSWORD) {
       return NextResponse.json({ success: true });
