@@ -5,6 +5,7 @@ import ProfileCard from "./ProfileCard";
 import SectionCard from "./SectionCard";
 import DoubleSlit from "./DoubleSlit";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import SecureDownload from "../components/SecureDownload";
 import { useLanguage } from './contexts/LanguageContext';
 import { useState, useEffect } from 'react';
 
@@ -95,6 +96,9 @@ export default function Home() {
       </SectionCard>
       <SectionCard title={t('languages')}>
         <ul>{languages.map((l) => <li key={l}>{l}</li>)}</ul>
+      </SectionCard>
+      <SectionCard title={t('downloads')}>
+        <SecureDownload />
       </SectionCard>
     </div>
   );

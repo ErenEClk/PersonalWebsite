@@ -131,6 +131,17 @@ const translations = {
     'lang.turkish': 'Türkçe (Ana dil)',
     'lang.english': 'İngilizce (İleri seviye)',
     'lang.german': 'Almanca (Başlangıç)',
+
+    // İndirmeler
+    'downloads': 'İndirmeler',
+    'download.gridnode': 'GridNode Test Paketi',
+    'password.required': 'Şifre Gerekli',
+    'enter.password': 'Bu dosyayı indirmek için lütfen şifreyi giriniz.',
+    'password.placeholder': 'Şifre',
+    'submit': 'Onayla',
+    'wrong.password': 'Hatalı şifre, tekrar deneyiniz.',
+    'download.ready': 'İndirme Hazır',
+    'click.to.download': 'Dosyayı İndir',
   },
   en: {
     // Main Page
@@ -250,6 +261,17 @@ const translations = {
     'lang.turkish': 'Turkish (Native)',
     'lang.english': 'English (Advanced)',
     'lang.german': 'German (Beginner)',
+
+    // Downloads
+    'downloads': 'Downloads',
+    'download.gridnode': 'GridNode Test Pack',
+    'password.required': 'Password Required',
+    'enter.password': 'Please enter the password to download this file.',
+    'password.placeholder': 'Password',
+    'submit': 'Submit',
+    'wrong.password': 'Incorrect password, please try again.',
+    'download.ready': 'Download Ready',
+    'click.to.download': 'Download File',
   }
 };
 
