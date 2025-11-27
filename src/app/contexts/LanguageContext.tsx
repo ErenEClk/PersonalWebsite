@@ -23,8 +23,8 @@ const translations = {
     'projects.coming.soon': 'Projeler bölümü yakında güncellenecek...',
     
     // Projeler
-    'project.1.title': 'Micro Fundus Camera Ar-Ge',
-    'project.1.description': 'Minyatürleştirilmiş retina görüntüleme cihazları üzerine araştırma ve geliştirme projesine katkıda bulunmaya başladım. Optik, fizik ve yapay zeka alanlarını birleştiriyor.',
+    'project.1.title': 'GridNode: Akıllı Dağıtık Hesaplama',
+    'project.1.description': 'Hesaplama yoğunluklu iş yüklerini otomatik olarak analiz edip parçalara ayıran ve heterojen bulut/uç düğümler arasında optimize ederek dağıtan bir orkestrasyon sistemi. Grafik bölümleme, altmodüler optimizasyon ve güven temelli modeller kullanarak maliyeti düşürürken güvenilirliği artırır.',
     'project.2.title': 'Teorik Matematik Araştırması',
     'project.2.description': 'Collatz konjektürü, tersinir hesaplama ve P vs NP gibi problemleri mantık ve bilgi teorisini birleştirerek bağımsız olarak araştırıyorum.',
     'project.3.title': 'Mobil ve Web Uygulama Geliştirme',
@@ -153,8 +153,8 @@ const translations = {
     'projects.coming.soon': 'Projects section will be updated soon...',
     
     // Projects
-    'project.1.title': 'Micro Fundus Camera R&D',
-    'project.1.description': 'Recently started contributing to a research and development project focused on miniaturized retinal imaging devices, combining optics, physics, and AI.',
+    'project.1.title': 'GridNode: Intelligent Distributed Computing',
+    'project.1.description': 'An intelligent distributed computing orchestration system that automatically analyzes compute-intensive workloads, decomposes them into parallelizable tasks using program slicing and dependency graph analysis, and optimally distributes execution across heterogeneous cloud and edge nodes—combining graph partitioning algorithms, submodular optimization for task assignment, and adaptive verification mechanisms to achieve significant cost reduction while maintaining reliability through data-locality-aware scheduling and reputation-based trust models.',
     'project.2.title': 'Theoretical Math Research',
     'project.2.description': 'Independently exploring problems such as the Collatz conjecture, reversible computation, and P vs NP through combining logic and information theory.',
     'project.3.title': 'Mobile & Web App Development',
